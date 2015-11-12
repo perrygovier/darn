@@ -1,14 +1,17 @@
 {
-  "name": "node-js-sample",
+  "name": "darn",
   "version": "0.1.0",
-  "description": "A sample Node.js app using Express 4",
-  "main": "index.js",
+  "description": "A web scraper providing a JSON feed for the DARN API using Express 4",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "dependencies": {
+    "cheerio": "^0.19.0",
     "express": "^4.0.0",
-    "ejs": "~1.0.0"
+    "ejs":     "~1.0.0",
+    "gulp":    "^3.9.0",
+    "request": "^2.65.0"
   },
   "engines": {
     "node": "0.10.x",
@@ -16,16 +19,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-sample"
+    "url": "https://github.com/perrygovier/darn"
   },
   "keywords": [
     "node",
     "heroku",
     "express"
   ],
-  "author": "Mark Pundsack",
-  "contributors": [
-    "Zeke Sikelianos <zeke@sikelianos.com> (http://zeke.sikelianos.com)"
-  ],
+  "author": "Perry Govier",
+  "contributors": [],
   "license": "MIT"
 }
