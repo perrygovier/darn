@@ -22,12 +22,8 @@ gulp.task('server', function() {
  * $ gulp
  * description: start the development environment
  */
-gulp.task('default', function() {
-  gulp.run('server');
-
-  gulp.watch(['./server.js', './server/'], function() {
-    gulp.run('server');
-  });
+gulp.task('default', ['server'], function() {
+  gulp.watch(['./server.js', './server/*'], ['server']);
 });
 
 // clean up if an error goes unhandled.
