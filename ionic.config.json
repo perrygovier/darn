@@ -2,11 +2,5 @@
   "name": "darn",
   "app_id": "",
   "v2": true,
-  "typescript": true,
-  "proxies": [
-    {
-      "path": "/darn",
-      "proxyUrl": "http://darnwi.com/"
-    }
-  ]
+  "typescript": true
 }
