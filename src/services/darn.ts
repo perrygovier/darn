@@ -6,26 +6,30 @@ import X2JS from "x2js";
 @Injectable()
 export class DarnService {  http: Http;
   data: any;
+  posts;
   private darnUrl: string;
 
   private require: any
 
   constructor(http: Http) {
     this.http = http;
-    this.data = null;
+    this.posts = [];
     this.darnUrl = '/darn?series=show-podcasts&feed=rss2';
     // this.darnUrl = 'http://darnwi.com?series=show-podcasts&feed=rss2';
-
   }
 
-  getAll() {
+  get(page?:number) {
+    let url = this.darnUrl;
+    var self = this;
+    if (page) {
+      url += '&paged=' + (page + 1);
+    } else {
+      this.data = [];
+    }
+
     return this.http
-      .get(this.darnUrl)
+      .get(url)
       .map(mapXML);
-  }
-
-  getData() {
-    return this.data;
   }
  }
 
@@ -36,14 +40,14 @@ function mapXML(data) {
   let response = x2js.xml2js(xml);
 
   let items = [];
-
   response.rss.channel.item.forEach(item => {
     items.push({
       title: item.title,
       description: item.description,
       link: item.link,
-      mp3: item.enclosure && item.enclosure._url ? item.enclosure._url : null
-    })
+      mp3: item.enclosure && item.enclosure._url ? item.enclosure._url : null,
+      tags: item.category
+    });
   })
 
   return items;

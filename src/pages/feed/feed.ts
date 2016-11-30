@@ -14,19 +14,36 @@ export class Feed {
   posts;
   isLoading;
   activeSoundId;
+  currentPage:number = 0;
 
-  constructor(public navCtrl: NavController, darn: DarnService) {
+  constructor(public navCtrl: NavController, public darn: DarnService) {
+    this.reset();
+  }
+
+  reset() {
     this.posts = [];
 
-
-    darn.getAll().subscribe(
+    this.darn.get().subscribe(
       items => {
-        this.posts = items
+        this.posts = items;
       },
       e => console.error(e),
       () => this.isLoading = false
     )
   }
+
+  doInfinite(infiniteScroll) {
+    this.currentPage++;
+    this.darn.get(this.currentPage).subscribe(
+      items => {
+        this.posts = this.posts.concat(items);
+        infiniteScroll.complete();
+      },
+      e => console.error(e),
+      () => this.isLoading = false
+    )
+  }
+
 
   play(i) {
     this.stop(this.activeSoundId);
