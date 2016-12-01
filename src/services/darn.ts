@@ -15,6 +15,7 @@ export class DarnService {  http: Http;
     this.http = http;
     this.posts = [];
     this.darnUrl = '/darn?series=show-podcasts&feed=rss2';
+    this.darnUrl = 'http://darn.herokuapp.com?series=show-podcasts&feed=rss2'
     // this.darnUrl = 'http://darnwi.com?series=show-podcasts&feed=rss2';
   }
 
